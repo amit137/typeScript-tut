@@ -1,0 +1,63 @@
+typescript does static checking
+
+
+//use of super keyword -is used to access properties on an object literal or class's [[Prototype]], or invoke a superclass's constructor.
+//here we are invoking superclass constructor 
+
+class Parent{
+  constructor(name){
+    this.name=name
+  }
+  separate(){
+    return `-`
+  }
+}
+
+class Child extends Parent{
+   constructor(name,index){
+     super(name)
+     this.index=index
+   }
+  getName(){
+    return this.name + super.separate() + this.index
+  }
+}
+
+
+const obj=new Child('amit')
+console.log(obj.name,obj.index)
+const obj2=new Child('sumit',12)
+console.log(obj2.name,obj2.index)
+console.log(obj2.getName())
+
+
+//another example 
+
+class Rectangle {
+  constructor(height, width) {
+    this.name = "Rectangle";
+    this.height = height;
+    this.width = width;
+  }
+  sayName() {
+    console.log(`Hi, I am a ${this.name}.`);
+  }
+  get area() {
+    return this.height * this.width;
+  }
+  set area(value) {
+    this._area = value;
+  }
+}
+
+class Square extends Rectangle {
+  constructor(length) {
+    // Here, it calls the parent class's constructor with lengths
+    // provided for the Rectangle's width and height
+    super(length, length);
+
+    // Note: In derived classes, super() must be called before you
+    // can use 'this'. Moving this to the top causes a ReferenceError.
+    this.name = "Square";
+  }
+}
